@@ -10,10 +10,10 @@ namespace ResizingClient.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            var result=ResizingUtil.Upload(File.ReadAllBytes("d:\\a.jpg"), "a.jpg", "face").Result;
-            Console.WriteLine(result.FormatUrl
-                );
-            Assert.IsTrue(result.IsSuccess);
+            //var result=ResizingUtil.Upload(File.ReadAllBytes("d:\\a.jpg"), "a.jpg", "face").Result;
+            //Console.WriteLine(result.FormatUrl
+            //    );
+            //Assert.IsTrue(result.IsSuccess);
         }
     }
 }
