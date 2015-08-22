@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ResizingClient")]
 [assembly: AssemblyDescription("Client for ResizingServer https://github.com/chsword/ResizingServer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("https://github.com/chsword/ResizingServer")]
+[assembly: AssemblyCompany("chsword")]
 [assembly: AssemblyProduct("ResizingClient")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
