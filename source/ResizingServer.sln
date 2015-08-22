@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResizingServer", "ResizingServer\ResizingServer.csproj", "{02059275-9E35-4559-AC19-19A8FA203D9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResizingClient", "ResizingClient\ResizingClient.csproj", "{0A9D7A29-99B7-46A5-8370-56C0E2E454A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{02059275-9E35-4559-AC19-19A8FA203D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02059275-9E35-4559-AC19-19A8FA203D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02059275-9E35-4559-AC19-19A8FA203D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9D7A29-99B7-46A5-8370-56C0E2E454A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9D7A29-99B7-46A5-8370-56C0E2E454A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9D7A29-99B7-46A5-8370-56C0E2E454A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9D7A29-99B7-46A5-8370-56C0E2E454A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
