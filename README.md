@@ -1,8 +1,26 @@
 # ResizingServer
 
+1. .NET base
+1. image server 
+1. support resizing thumb
+1. use [ImageResizer](http://imageresizing.net/) 
+
+
+
 ### Server Demo
 
+
+deploy ResizingServer to a web server 
+and config
+``` xml
+
+```
+
 ### Client Demo
+
+[![install from nuget](http://img.shields.io/nuget/v/ResizingClient.svg?style=flat-square)](https://www.nuget.org/packages/ResizingClient)
+[![downloads](http://img.shields.io/nuget/dt/ResizingClient.svg?style=flat-square)](https://www.nuget.org/packages/ResizingClient)
+[![release](https://img.shields.io/github/release/chsword/ResizingServer.svg?style=flat-square)](https://github.com/chsword/ResizingServer/releases)
 
 upload to server 
 ``` c# 
