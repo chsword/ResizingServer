@@ -19,7 +19,12 @@ namespace ResizingServer.Controllers
             return Json(new {success = false, message});
         }
 
-        // GET: Upload
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return Content("allow get");
+        }
+        [HttpPost]
         public ActionResult Index(string apiKey, string category, HttpPostedFileBase file)
         {
             if (_apiKey != apiKey) return Error("error api key");
@@ -33,6 +38,10 @@ namespace ResizingServer.Controllers
                 return Error("error category");
             }
             var extenssion = Path.GetExtension(filename);
+            if (string.IsNullOrWhiteSpace(extenssion) || _extensions.All(c => extenssion != c))
+            {
+                return Error("error extensions");
+            }
             var path = new ResizingPath(category,extenssion);
         
             var physicalPath = Server.MapPath(path.PhysicalPath);
@@ -43,7 +52,7 @@ namespace ResizingServer.Controllers
             var physicalFilename= Server.MapPath(path.PhysicalFilename);
             file.SaveAs(physicalFilename);
 
-            return Json(new {success = true, data = new {format = path.PhysicalPath}});
+            return Json(new {success = true,  format = path.VirtualFormatFilename});
         }
     }
 
@@ -72,9 +81,9 @@ namespace ResizingServer.Controllers
             Date = DateTime.Now.ToString("dd");
             Category = category;
             PhysicalPath = $"~/upload/{category}/{Year}{Month}/{Date}";
-            PhysicalFilename = $"{PhysicalPath}/{guid}.{extension}";
+            PhysicalFilename = $"{PhysicalPath}/{guid}{extension}";
             VirtualFormatFilename =
-                $"/u/{category}/{guid1}{Date}{guid2}{Year}{guid3}{Month}{guid4}{{0}}x{{1}}{{2}}.{extension}";
+                $"/u/{category}/{guid1}{Date}{guid2}{Year}{guid3}{Month}{guid4}{{0}}x{{1}}{{2}}{extension}";
         }
     }
 }
