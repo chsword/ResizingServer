@@ -22,6 +22,15 @@ namespace ResizingClient
 
         }
 
+        public static Task<UploadResult> Upload(Stream stream, string filename, string category)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+            var bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, (int) stream.Length);
+            return Upload(bytes, filename, category);
+
+        }
+
         static public async Task<UploadResult> Upload(byte[] bytes, string filename, string category)
         {
             using (var client = new HttpClient())
