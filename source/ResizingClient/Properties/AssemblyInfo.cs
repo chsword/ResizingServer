@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("ResizingClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Client for ResizingServer https://github.com/chsword/ResizingServer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("https://github.com/chsword/ResizingServer")]
 [assembly: AssemblyProduct("ResizingClient")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
