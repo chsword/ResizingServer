@@ -155,9 +155,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ResizingClient\ResizingClient.csproj">
       <Project>{0a9d7a29-99b7-46a5-8370-56c0e2e454a3}</Project>
