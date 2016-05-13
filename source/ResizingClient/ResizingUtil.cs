@@ -15,7 +15,7 @@ namespace ResizingClient
         
         public static string UploadUrl = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.UploadUrl"];
 
-        static public string FormatUrl(string format, int width, int height, ResizingMode mode = ResizingMode.Crop)
+        public static string FormatUrl(string format, int width, int height, ResizingMode mode = ResizingMode.Crop)
         {
             return
                 $"{Host}{string.Format(format, width, height, GetMode(mode))}";
