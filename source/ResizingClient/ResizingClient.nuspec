@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ResizingClient</id>
+    <version>$version$</version>
+    <title>ResizingClient Library</title>
+    <authors>Zou Jian</authors>
+    <owners>chsword</owners>
+    <copyright>Copyright ©  2014-2016</copyright>
+    <projectUrl>https://github.com/chsword/ResizingServer</projectUrl>
+    <description>Client for ResizingServer</description>
+    <tags>image,.net,resize,thumb</tags>
+    <dependencies />
+  </metadata>
+</package>

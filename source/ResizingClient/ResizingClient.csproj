@@ -10,7 +10,6 @@
     <RootNamespace>ResizingClient</RootNamespace>
     <AssemblyName>ResizingClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
- 
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <RestorePackages>true</RestorePackages>
@@ -56,6 +55,7 @@
     <Compile Include="UploadResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ResizingClient.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
