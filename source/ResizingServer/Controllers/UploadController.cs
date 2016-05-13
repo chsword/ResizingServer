@@ -14,7 +14,8 @@ namespace ResizingServer.Controllers
         private readonly string _apiKey = ConfigurationManager.AppSettings["ApiKey"];
         private readonly string[] _allowFolders = (ConfigurationManager.AppSettings["AllowFolders"]??"").Split(',');
         private readonly string[] _extensions= new[] { ".jpg", ".png" };
-
+        private readonly bool _allowAllExtenssions = (ConfigurationManager.AppSettings["AllowAllExtensions"] == "true");
+        
         private ActionResult Error(string message)
         {
             return Json(new {success = false, message});
@@ -30,7 +31,9 @@ namespace ResizingServer.Controllers
         {
             if (_apiKey != apiKey) return Error("error api key");
             var filename = file.FileName;
-            if (!_extensions.Any(c => filename.EndsWith(c)))
+            if (
+                !_allowAllExtenssions && 
+                !_extensions.Any(c => filename.EndsWith(c)))
             {
                 return Error("error extensions");
             }
@@ -57,7 +60,7 @@ namespace ResizingServer.Controllers
             {
                 IsSuccess = true,
                 FormatUrl = path.VirtualFormatFilename,
-                RawUrl = ResizingUtil.FormatUrl(path.VirtualFormatFilename, 0, 0)
+                RawUrl = path.RawPath
 
             });
         }
@@ -70,10 +73,9 @@ namespace ResizingServer.Controllers
         public string Date { get; private set; }
         public string Category { get; private set; }
         public string PhysicalPath { get; private set; }
-        //public string VirtualPath { get; private set; }
         public string PhysicalFilename { get; private set; }
-        //public string VirtualFilename { get; private set; }
         public string VirtualFormatFilename { get; private set; }
+        public string RawPath { get; set; }
         public ResizingPath(string category,string extension)
         {
             // 0246 guid
@@ -88,6 +90,7 @@ namespace ResizingServer.Controllers
             Date = DateTime.Now.ToString("dd");
             Category = category;
             PhysicalPath = $"~/upload/{category}/{Year}{Month}/{Date}";
+            RawPath = $"/upload/{category}/{Year}{Month}/{Date}";
             PhysicalFilename = $"{PhysicalPath}/{guid}{extension}";
             VirtualFormatFilename =
                 $"/u/{category}/{guid1}{Date}{guid2}{Year}{guid3}{Month}{guid4}{{0}}x{{1}}{{2}}{extension}";
