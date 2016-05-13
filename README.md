@@ -1,16 +1,15 @@
 # ResizingServer
 
-1. .NET base
-1. image server 
-1. support resizing thumb
-1. use [ImageResizer](http://imageresizing.net/) 
+* .NET base
+* Image server 
+* Support resizing thumb
+* Use [ImageResizer](http://imageresizing.net/) 
 
 
 
 ### Server Demo
 
-
-deploy ResizingServer to a web server 
+Deploy ResizingServer to a web server 
 and config
 ``` xml
   <appSettings>
@@ -39,7 +38,17 @@ url like /u/face/b96225af353d15504302a087f4f46bb0151d1c100x100c.jpg
 [![downloads](http://img.shields.io/nuget/dt/ResizingClient.svg?style=flat-square)](https://www.nuget.org/packages/ResizingClient)
 [![release](https://img.shields.io/github/release/chsword/ResizingServer.svg?style=flat-square)](https://github.com/chsword/ResizingServer/releases)
 
-install nuget package
+Config the App.config / Web.config
+
+```
+  <appSettings>
+    <add key ="ResizingServer.Host" value="http://192.168.1.99:43287/"/>
+    <add key ="ResizingServer.UploadUrl" value="http://192.168.1.99:43287/api"/>
+    <add key ="ResizingServer.ApiKey" value="48DFD0EE-61A2-4CB5-B1D6-33E917A83202"/>
+  </appSettings>
+```
+
+Install nuget package
 ``` powershell
 Install-Package ResizingClient
 ```
