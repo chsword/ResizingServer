@@ -164,6 +164,12 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResizingClient\ResizingClient.csproj">
+      <Project>{0a9d7a29-99b7-46a5-8370-56c0e2e454a3}</Project>
+      <Name>ResizingClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

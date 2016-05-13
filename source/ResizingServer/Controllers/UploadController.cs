@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ResizingClient;
 
 namespace ResizingServer.Controllers
 {
@@ -52,7 +53,13 @@ namespace ResizingServer.Controllers
             var physicalFilename= Server.MapPath(path.PhysicalFilename);
             file.SaveAs(physicalFilename);
 
-            return Json(new {success = true,  format = path.VirtualFormatFilename});
+            return Json(new UploadResult
+            {
+                IsSuccess = true,
+                FormatUrl = path.VirtualFormatFilename,
+                RawUrl = ResizingUtil.FormatUrl(path.VirtualFormatFilename, 0, 0)
+
+            });
         }
     }
 
