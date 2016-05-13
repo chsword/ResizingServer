@@ -7,7 +7,7 @@ using ImageResizer.Configuration;
 
 namespace ResizingServer
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -24,8 +24,8 @@ namespace ResizingServer
                     // )@"/images/([0-9]+)/([0-9]+)/([^/]+)\.(jpg|png)"
                     ev.VirtualPath = regex.Replace(ev.VirtualPath, delegate(Match match)
                     {
-                        ev.QueryString["width"] = match.Groups[9].Value;
-                        ev.QueryString["height"] = match.Groups[10].Value;
+                        ev.QueryString["width"] = GetSizeValue(match.Groups[9].Value);
+                        ev.QueryString["height"] = GetSizeValue(match.Groups[10].Value);
                         //ev.QueryString["scale"] = "both";
                         ev.QueryString["mode"] = GetMode(match.Groups[11].Value);
                         return
@@ -35,6 +35,12 @@ namespace ResizingServer
                     context.RewritePath(ev.VirtualPath);
                 }
             };
+        }
+
+        private string GetSizeValue(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value) || value == "0") return "10000";
+            return value;
         }
 
         private string GetMode(string value)
