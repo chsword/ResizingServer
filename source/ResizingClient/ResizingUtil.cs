@@ -31,7 +31,7 @@ namespace ResizingClient
 
         }
 
-        static public async Task<UploadResult> Upload(byte[] bytes, string filename, string category)
+        public static async Task<UploadResult> Upload(byte[] bytes, string filename, string category)
         {
             using (var client = new HttpClient())
             {
