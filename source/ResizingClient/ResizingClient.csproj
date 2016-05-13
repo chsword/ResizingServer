@@ -10,6 +10,7 @@
     <RootNamespace>ResizingClient</RootNamespace>
     <AssemblyName>ResizingClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <EnableNuGetPackageRestore>true</EnableNuGetPackageRestore>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
