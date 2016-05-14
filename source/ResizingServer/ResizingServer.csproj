@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\JsonNetResult.cs" />
+    <Compile Include="Controllers\ResizingPath.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
