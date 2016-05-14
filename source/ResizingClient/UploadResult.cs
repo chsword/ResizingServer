@@ -10,5 +10,7 @@ namespace ResizingClient
         public string FormatUrl { get; set; }
         [JsonProperty("raw")]
         public string RawUrl { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }
