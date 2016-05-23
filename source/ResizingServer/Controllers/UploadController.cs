@@ -77,7 +77,7 @@ namespace ResizingServer.Controllers
 
         private readonly string _apiKey = ConfigurationManager.AppSettings["ApiKey"];
         private readonly string[] _allowFolders = (ConfigurationManager.AppSettings["AllowFolders"]??"").Split(',');
-        private readonly string[] _extensions= new[] { ".jpg", ".png" };
+        private readonly string[] _extensions= { ".jpg", ".png" };
         private readonly bool _allowAllExtenssions = (ConfigurationManager.AppSettings["AllowAllExtensions"] == "true");
         private readonly bool _allowLocalIpUploadOnly = (ConfigurationManager.AppSettings["AllowLocalIpUploadOnly"] == "true");
 
