@@ -18,7 +18,6 @@ namespace ResizingClient
         {
             return
                 $"{Host}{string.Format(format, width, height, GetMode(mode))}";
-
         }
 
         public static Task<UploadResult> Upload(Stream stream, string filename, string category)

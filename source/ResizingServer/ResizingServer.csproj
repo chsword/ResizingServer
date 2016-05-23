@@ -134,6 +134,7 @@
     <Compile Include="Controllers\JsonNetResult.cs" />
     <Compile Include="Controllers\ResizingPath.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Current.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

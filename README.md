@@ -77,3 +77,10 @@ var url1 = ResizingUtil.Format(url,100,100,ResizingMode.Pad);
 var url1 = ResizingUtil.Format(url,100,100);
 
 ```
+
+
+Open Source Projects in Use
+
+[ImageResizer](http://imageresizing.net/) 
+[Opserver](https://github.com/opserver/Opserver)
+[Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
