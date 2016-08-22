@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -36,21 +37,28 @@ namespace ResizingServer.Controllers
             {
                 return Error("Invalid category");
             }
-            var extenssion = Path.GetExtension(filename);
-            var path = new ResizingPath(category,extenssion);
-            var physicalPath = Server.MapPath(path.PhysicalPath);
-            if (!Directory.Exists(physicalPath))
+            try
             {
-                Directory.CreateDirectory(physicalPath);
+                var extenssion = Path.GetExtension(filename);
+                var path = new ResizingPath(category, extenssion);
+                var physicalPath = Server.MapPath(path.PhysicalPath);
+                if (!Directory.Exists(physicalPath))
+                {
+                    Directory.CreateDirectory(physicalPath);
+                }
+                var physicalFilename = Server.MapPath(path.PhysicalFilename);
+                file.SaveAs(physicalFilename);
+                return Json(new UploadResult
+                {
+                    IsSuccess = true,
+                    FormatUrl = path.VirtualFormatFilename,
+                    RawUrl = path.RawPath
+                });
             }
-            var physicalFilename= Server.MapPath(path.PhysicalFilename);
-            file.SaveAs(physicalFilename);
-            return Json(new UploadResult
+            catch(Exception ex)
             {
-                IsSuccess = true,
-                FormatUrl = path.VirtualFormatFilename,
-                RawUrl = path.RawPath
-            });
+                return Error(ex.Message);
+            }
         }
 
         #region Override Method
