@@ -22,7 +22,7 @@ namespace ResizingServer
                     ev.VirtualPath.Last() == 'g')
                 {
                     // )@"/images/([0-9]+)/([0-9]+)/([^/]+)\.(jpg|png)"
-                    ev.VirtualPath = regex.Replace(ev.VirtualPath, delegate(Match match)
+                    ev.VirtualPath = regex.Replace(ev.VirtualPath, delegate (Match match)
                     {
                         ev.QueryString["width"] = GetSizeValue(match.Groups[9].Value);
                         ev.QueryString["height"] = GetSizeValue(match.Groups[10].Value);

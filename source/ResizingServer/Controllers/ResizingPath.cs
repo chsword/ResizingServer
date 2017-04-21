@@ -4,7 +4,7 @@ namespace ResizingServer.Controllers
 {
     public class ResizingPath
     {
-        public string Year { get;private set; }
+        public string Year { get; private set; }
         public string Month { get; private set; }
         public string Date { get; private set; }
         public string Category { get; private set; }
@@ -12,7 +12,7 @@ namespace ResizingServer.Controllers
         public string PhysicalFilename { get; private set; }
         public string VirtualFormatFilename { get; private set; }
         public string RawPath { get; set; }
-        public ResizingPath(string category,string extension)
+        public ResizingPath(string category, string extension)
         {
             // 0246 guid
             // 0 1 ÈÕ 2 3Äê 4 5ÔÂ 6 7Width 8Height 9Mode 10 ext  +2
