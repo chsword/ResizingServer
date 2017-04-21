@@ -12,7 +12,7 @@ namespace ResizingServer
             routes.MapRoute(
                 name: "Upload",
                 url: System.Configuration.ConfigurationManager.AppSettings["UploadRouteUrl"],
-                defaults: new { controller = "Upload", action = "Index"}
+                defaults: new { controller = "Upload", action = "Index" }
             );
         }
     }
