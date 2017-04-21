@@ -9,10 +9,10 @@ namespace ResizingClient
 {
     public class ResizingUtil
     {
-        public static string Host = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.Host"];
-        public static string ApiKey = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.ApiKey"];
+        public static string Host { get; set; } = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.Host"];
+        public static string ApiKey { get; set; } = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.ApiKey"];
         
-        public static string UploadUrl = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.UploadUrl"];
+        public static string UploadUrl { get; set; } = System.Configuration.ConfigurationManager.AppSettings["ResizingServer.UploadUrl"];
 
         public static string FormatUrl(string format, int width, int height, ResizingMode mode = ResizingMode.Crop)
         {
