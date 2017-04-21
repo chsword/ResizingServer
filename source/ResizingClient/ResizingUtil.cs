@@ -26,14 +26,12 @@ namespace ResizingClient
             var bytes = new byte[stream.Length];
             stream.Read(bytes, 0, (int) stream.Length);
             return Upload(bytes, filename, category);
-
         }
 
         public static async Task<UploadResult> Upload(byte[] bytes, string filename, string category)
         {
             using (var client = new HttpClient())
             {
-
                 using (var content =
                     new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture)))
                 {
