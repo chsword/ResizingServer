@@ -30,7 +30,6 @@ namespace ResizingServer
                         ev.QueryString["mode"] = GetMode(match.Groups[11].Value);
                         return
                             $"/upload/{match.Groups[1].Value}/{match.Groups[5].Value}{match.Groups[7].Value}/{match.Groups[3].Value}/{match.Groups[2].Value}{match.Groups[4].Value}{match.Groups[6].Value}{match.Groups[8].Value}.{match.Groups[12].Value}";
-
                     });
                     context.RewritePath(ev.VirtualPath);
                 }
