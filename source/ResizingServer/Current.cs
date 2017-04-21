@@ -46,19 +46,19 @@ namespace ResizingServer
             get
             {
                 var ip = Request.ServerVariables["REMOTE_ADDR"];
-                var ipForwarded = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                var ipforwarded = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                 var realIp = Request.ServerVariables["HTTP_X_REAL_IP"];
                 if (!string.IsNullOrWhiteSpace(realIp)
                     && Request.ServerVariables["HTTP_X_FORWARDED_PROTO"] == "https")
                     return realIp;
 
                 // check if we were forwarded from a proxy
-                if (!string.IsNullOrWhiteSpace(ipForwarded))
+                if (!string.IsNullOrWhiteSpace(ipforwarded))
                 {
-                    ipForwarded = LastIpAddress.Match(ipForwarded).Value;
-                    if (!string.IsNullOrWhiteSpace(ipForwarded)
-                        && !IsLocalIp(ipForwarded))
-                        ip = ipForwarded;
+                    ipforwarded = LastIpAddress.Match(ipforwarded).Value;
+                    if (!string.IsNullOrWhiteSpace(ipforwarded)
+                        && !IsLocalIp(ipforwarded))
+                        ip = ipforwarded;
                 }
                 return !string.IsNullOrWhiteSpace(ip) ? ip : "0.0.0.0";
             }
@@ -66,7 +66,7 @@ namespace ResizingServer
 
         public static bool IsLocalIp(string s)
         {
-            return (s.StartsWith("192.168.") || s.StartsWith("10.") || s.StartsWith("127.0.0."));
+            return s.StartsWith("192.168.") || s.StartsWith("10.") || s.StartsWith("127.0.0.");
         }
     }
 }
