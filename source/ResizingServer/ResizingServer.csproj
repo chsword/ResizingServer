@@ -47,12 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ImageResizer.4.1.8\lib\net45\ImageResizer.dll</HintPath>
     </Reference>
     <Reference Include="ImageResizer.Plugins.DiskCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ImageResizer.Plugins.DiskCache.4.0.5\lib\net45\ImageResizer.Plugins.DiskCache.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ImageResizer.Plugins.DiskCache.4.1.8\lib\net45\ImageResizer.Plugins.DiskCache.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
