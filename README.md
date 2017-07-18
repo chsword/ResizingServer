@@ -1,5 +1,10 @@
 # ResizingServer
 
+[![install from nuget](http://img.shields.io/nuget/v/ResizingClient.svg?style=flat-square)](https://www.nuget.org/packages/ResizingClient)
+[![release](https://img.shields.io/github/release/chsword/ResizingServer.svg?style=flat-square)](https://github.com/chsword/ResizingServer/releases)
+[![Build status](https://ci.appveyor.com/api/projects/status/wcumkaagutgapwmn?svg=true)](https://ci.appveyor.com/project/chsword/resizingserver)
+[![CodeFactor](https://www.codefactor.io/repository/github/chsword/resizingserver/badge)](https://www.codefactor.io/repository/github/chsword/resizingserver)
+
 * .NET base
 * Image server 
 * Support resizing thumb
@@ -34,9 +39,6 @@ url like /u/face/b96225af353d15504302a087f4f46bb0151d1c100x100c.jpg
 
 ### Client Demo
 
-[![install from nuget](http://img.shields.io/nuget/v/ResizingClient.svg?style=flat-square)](https://www.nuget.org/packages/ResizingClient)
-[![release](https://img.shields.io/github/release/chsword/ResizingServer.svg?style=flat-square)](https://github.com/chsword/ResizingServer/releases)
-[![Build status](https://ci.appveyor.com/api/projects/status/wcumkaagutgapwmn?svg=true)](https://ci.appveyor.com/project/chsword/resizingserver)
 
 Config the App.config / Web.config
 
