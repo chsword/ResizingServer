@@ -25,6 +25,7 @@
     </NuGetPackageImportStamp>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Controllers\JsonNetResult.cs" />
     <Compile Include="Controllers\ResizingPath.cs" />
     <Compile Include="Controllers\UploadController.cs" />
