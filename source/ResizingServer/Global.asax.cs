@@ -50,7 +50,7 @@ namespace ResizingServer
                         return value[1].ToString();
                 }
             }
-            return "1";
+            return "0";
         }
 
         private string GetSizeValue(string value)
