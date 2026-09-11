@@ -55,7 +55,7 @@ Install nuget package
 Install-Package ResizingClient
 ```
 
-ResizingClient package supports `net452`, `netstandard2.0`, and `net8.0`.
+ResizingClient package supports `net45`, `netstandard2.0`, and `net8.0`.
 
 
 upload to server 
