@@ -29,6 +29,10 @@ jobs:
         run: dotnet restore source/ResizingClient/ResizingClient.csproj
       - name: Build ResizingClient
         run: dotnet build source/ResizingClient/ResizingClient.csproj -c Release --no-restore
+      - name: Restore ResizingClient.Tests
+        run: dotnet restore source/ResizingClient.Tests/ResizingClient.Tests.csproj
+      - name: Test ResizingClient.Tests
+        run: dotnet test source/ResizingClient.Tests/ResizingClient.Tests.csproj -c Release --no-restore
 
   pack:
     runs-on: ubuntu-latest

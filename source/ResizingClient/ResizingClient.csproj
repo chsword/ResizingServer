@@ -5,10 +5,16 @@
     <AssemblyName>ResizingClient</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageId>ResizingClient</PackageId>
+    <Title>ResizingClient Library</Title>
+    <Authors>Zou Jian</Authors>
+    <Copyright>Copyright ©  2014-2016</Copyright>
+    <PackageProjectUrl>https://github.com/chsword/ResizingServer</PackageProjectUrl>
+    <Description>Client for ResizingServer</Description>
+    <PackageTags>image .net resize thumb</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net45" Version="1.0.3" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net45" Version="1.0.3" PrivateAssets="all" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
