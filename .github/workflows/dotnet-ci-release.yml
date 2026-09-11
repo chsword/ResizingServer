@@ -49,7 +49,7 @@ jobs:
       - name: Restore ResizingServer solution
         run: nuget restore source/ResizingServer.sln
       - name: Build ResizingServer
-        run: msbuild source/ResizingServer/ResizingServer.csproj /p:Configuration=Release /p:Platform="Any CPU"
+        run: msbuild source/ResizingServer/ResizingServer.csproj /p:Configuration=Release /p:Platform=AnyCPU
 
   pack:
     runs-on: ubuntu-latest
