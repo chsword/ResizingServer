@@ -27,7 +27,7 @@ namespace ResizingClient.Tests
         public void FormatTencentCdnUrl_UsesExpectedQuery()
         {
             Assert.AreEqual(
-                "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/200x300/gravity/center/crop/200x300",
+                "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/!200x300r/gravity/center/crop/200x300",
                 ResizingUtil.FormatTencentCdnUrl("https://img.example.com/u/face/a.jpg", 200, 300, ResizingMode.Crop));
             Assert.AreEqual(
                 "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/200x300",
@@ -89,10 +89,10 @@ namespace ResizingClient.Tests
                 "https://img.example.com/u/face/a.jpg?v=1&x-oss-process=image/resize,m_fill,w_200,h_300#preview",
                 ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/u/face/a.jpg?v=1#preview", 200, 300, ResizingMode.Crop));
             Assert.AreEqual(
-                "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/200x300/gravity/center/crop/200x300#preview",
+                "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/!200x300r/gravity/center/crop/200x300#preview",
                 ResizingUtil.FormatTencentCdnUrl("https://img.example.com/u/face/a.jpg#preview", 200, 300, ResizingMode.Crop));
             Assert.AreEqual(
-                "https://img.example.com/u/face/a.jpg?v=1&imageMogr2/thumbnail/200x300/gravity/center/crop/200x300#preview",
+                "https://img.example.com/u/face/a.jpg?v=1&imageMogr2/thumbnail/!200x300r/gravity/center/crop/200x300#preview",
                 ResizingUtil.FormatTencentCdnUrl("https://img.example.com/u/face/a.jpg?v=1#preview", 200, 300, ResizingMode.Crop));
             Assert.AreEqual(
                 "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,m_pad#preview",

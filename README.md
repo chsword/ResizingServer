@@ -81,10 +81,78 @@ var url1 = ResizingUtil.Format(url,100,100,ResizingMode.Pad);
 var url2 = ResizingUtil.Format(url,100,100);
 var tencentUrl = ResizingUtil.FormatTencentCdnUrl("https://img.example.com/a.jpg", 100, 100, ResizingMode.Crop);
 var aliyunUrl = ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/a.jpg", 100, 100, ResizingMode.Max);
-var awsUrl = ResizingUtil.FormatAwsCdnUrl("https://img.example.com/a.jpg", 100, 100, ResizingMode.Pad);
+var awsUrl = ResizingUtil.FormatAwsCdnUrl(
+    "https://images.example.com", "source-bucket", "a.jpg",
+    100, 100, ResizingFormat.WebP, ResizingMode.Pad);
 
 ```
 
+### Output format conversion
+
+`ResizingFormat` supports `Original` (no explicit conversion), `Jpeg`, `Png`, and
+`WebP`. Existing resize-only overloads remain available. New overloads take
+`outputFormat` before the optional `mode`.
+
+``` c#
+// Self-hosted: retain the source extension; select the output using ?format=webp.
+var localWebP = ResizingUtil.FormatUrl(result.FormatUrl, 200, 300, ResizingFormat.WebP);
+var localFormatOnly = ResizingUtil.FormatImageUrl("https://img.example.com/upload/a.png", ResizingFormat.Jpeg);
+
+// Tencent COS / Cloud Infinite: resize and convert, or convert only.
+var tencentWebP = ResizingUtil.FormatTencentCdnUrl(
+    "https://img.example.com/a.jpg", 200, 300, ResizingFormat.WebP, ResizingMode.Crop);
+var tencentPng = ResizingUtil.FormatTencentCdnUrl("https://img.example.com/a.jpg", ResizingFormat.Png);
+
+// Aliyun OSS image processing.
+var aliyunWebP = ResizingUtil.FormatAliyunCdnUrl(
+    "https://img.example.com/a.jpg", 200, 300, ResizingFormat.WebP, ResizingMode.Max);
+var aliyunJpeg = ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/a.png", ResizingFormat.Jpeg);
+
+// AWS Dynamic Image Transformation for Amazon CloudFront (deployed separately).
+var awsWebP = ResizingUtil.FormatAwsCdnUrl(
+    "https://images.example.com", "source-bucket", "folder/a.jpg",
+    200, 300, ResizingFormat.WebP, ResizingMode.Pad);
+var awsPng = ResizingUtil.FormatAwsCdnUrl(
+    "https://images.example.com", "source-bucket", "folder/a.jpg", ResizingFormat.Png);
+```
+
+| Backend | Resize modes: Crop / Max / Pad | Format syntax |
+| --- | --- | --- |
+| Self-hosted ImageResizer | `crop` / `max` / `pad` | `format=jpg`, `format=png`, `format=webp` |
+| Tencent COS / CI | Cover resize then center crop / fit within / fit with padding | `imageMogr2/.../format/webp` |
+| Aliyun OSS | `m_fill` / `m_lfit` / `m_pad` | `x-oss-process=image/.../format,webp` |
+| AWS Dynamic Image Transformation | Sharp `cover` / `inside` / `contain` | Base64 UTF-8 JSON path with `bucket`, `key`, `edits.resize`, `edits.toFormat` |
+
+Tencent Crop now uses `thumbnail/!200x300r` before center cropping, rather than
+fitting inside the target rectangle (which could leave too few pixels to crop).
+Provider-specific upscaling limits, padding colors, transparency, animation and
+encoding defaults still apply; the methods do not guarantee byte-identical output.
+New cloud resize calls require positive width/height and a defined mode/format.
+
+Use original, unprocessed image URLs for Tencent, OSS and self-hosted methods.
+Ordinary query parameters and fragments are retained, but existing image-processing
+instructions are not merged. Generate processing URLs **before signing**: these
+helpers neither create signatures nor re-sign modified URLs.
+
+AWS requires an actual deployment of
+[Dynamic Image Transformation for Amazon CloudFront](https://github.com/aws-solutions/dynamic-image-transformation-for-amazon-cloudfront).
+Pass its HTTP(S) endpoint (without query parameters, fragment or credentials), an
+allowed source bucket, and the exact, **unescaped S3 object key**, not an S3 URL.
+JSON escaping and UTF-8 Base64 encoding are handled by the client. The bucket must
+be in the deployment's `SOURCE_BUCKETS`; if signatures are enabled, sign the final
+generated URL separately. `Original` omits the format edit; backend auto-format
+settings such as `AUTO_WEBP` can still apply.
+
+The old `FormatAwsCdnUrl(url, width, height, mode)` overload is deprecated and
+retained only for compatibility with custom services that understand its legacy
+`x-amz-process` query. **S3 and CloudFront do not natively implement that protocol.**
+Use the endpoint/bucket/key overloads above for the AWS solution.
+
+Protocol references:
+[Tencent resize](https://cloud.tencent.com/document/product/460/36540),
+[Tencent format](https://cloud.tencent.com/document/product/460/36543),
+[OSS format](https://help.aliyun.com/zh/oss/user-guide/convert-image-formats-2),
+[AWS request parsing](https://github.com/aws-solutions/dynamic-image-transformation-for-amazon-cloudfront/blob/main/source/image-handler/image-request.ts).
 
 Open Source Projects in Use
 
