@@ -55,7 +55,7 @@ Install nuget package
 Install-Package ResizingClient
 ```
 
-ResizingClient package supports `net45`, `netstandard2.0`, and `net8.0`.
+ResizingClient package supports `net45`, `netstandard2.0`, `net8.0`, and `net10.0`.
 
 
 upload to server 
@@ -78,7 +78,10 @@ convert format to url
 using ResizingClient;
 // ...
 var url1 = ResizingUtil.Format(url,100,100,ResizingMode.Pad);
-var url1 = ResizingUtil.Format(url,100,100);
+var url2 = ResizingUtil.Format(url,100,100);
+var tencentUrl = ResizingUtil.FormatTencentCdnUrl("https://img.example.com/a.jpg", 100, 100, ResizingMode.Crop);
+var aliyunUrl = ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/a.jpg", 100, 100, ResizingMode.Max);
+var awsUrl = ResizingUtil.FormatAwsCdnUrl("https://img.example.com/a.jpg", 100, 100, ResizingMode.Pad);
 
 ```
 
