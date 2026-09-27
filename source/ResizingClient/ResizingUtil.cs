@@ -105,7 +105,7 @@ namespace ResizingClient
             var fragmentIndex = url.IndexOf('#');
             var fragment = fragmentIndex >= 0 ? url.Substring(fragmentIndex) : string.Empty;
             var urlWithoutFragment = fragmentIndex >= 0 ? url.Substring(0, fragmentIndex) : url;
-            var separator = urlWithoutFragment.IndexOf('?', StringComparison.Ordinal) >= 0 ? "&" : "?";
+            var separator = urlWithoutFragment.IndexOf('?') >= 0 ? "&" : "?";
             return $"{urlWithoutFragment}{separator}{query}{fragment}";
         }
 
