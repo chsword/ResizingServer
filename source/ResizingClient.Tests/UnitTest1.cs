@@ -79,6 +79,9 @@ namespace ResizingClient.Tests
             Assert.AreEqual(
                 "https://img.example.com/u/face/a.jpg?x-oss-process=image/resize,m_fill,w_200,h_300#preview",
                 ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/u/face/a.jpg#preview", 200, 300, ResizingMode.Crop));
+            Assert.AreEqual(
+                "https://img.example.com/u/face/a.jpg?v=1&x-oss-process=image/resize,m_fill,w_200,h_300#preview",
+                ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/u/face/a.jpg?v=1#preview", 200, 300, ResizingMode.Crop));
         }
     }
 }
