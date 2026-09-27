@@ -1,10 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework Condition="'$(RunServerTests)' != 'true'">net8.0</TargetFramework>
+    <TargetFramework Condition="'$(RunServerTests)' == 'true'">net472</TargetFramework>
     <RootNamespace>ResizingClient.Tests</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RunServerTests)' == 'true'">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
@@ -14,4 +19,30 @@
   <ItemGroup>
     <ProjectReference Include="..\ResizingClient\ResizingClient.csproj" />
   </ItemGroup>
+  <ItemGroup Condition="'$(RunServerTests)' == 'true'">
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="ImageResizer">
+      <HintPath>..\ResizingServer\bin\ImageResizer.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.WebP">
+      <HintPath>..\ResizingServer\bin\ImageResizer.Plugins.WebP.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Imazen.WebP">
+      <HintPath>..\ResizingServer\bin\Imazen.WebP.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>..\ResizingServer\bin\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <None Include="..\ResizingServer\Web.config" Link="ResizingServer.Web.config" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\ResizingServer\bin\runtimes\win-x64\native\*.dll" Link="runtimes\win-x64\native\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\ResizingServer\bin\runtimes\win-x86\native\*.dll" Link="runtimes\win-x86\native\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="EnsureServerBuild" BeforeTargets="ResolveReferences" Condition="'$(RunServerTests)' == 'true'">
+    <Error Condition="!Exists('..\ResizingServer\bin\Imazen.WebP.dll')" Text="Build ResizingServer before running the server format integration tests." />
+  </Target>
 </Project>

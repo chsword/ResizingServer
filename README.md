@@ -154,6 +154,44 @@ Protocol references:
 [OSS format](https://help.aliyun.com/zh/oss/user-guide/convert-image-formats-2),
 [AWS request parsing](https://github.com/aws-solutions/dynamic-image-transformation-for-amazon-cloudfront/blob/main/source/image-handler/image-request.ts).
 
+### Self-hosted WebP deployment
+
+The server now requires **Windows IIS and .NET Framework 4.7.2 or later**.
+The client library's supported frameworks are unchanged. The server registers
+ImageResizer's `WebPEncoder` with Imazen.WebP 11 and maintained Windows x86/x64
+native runtime packages; the pinned runtime package 1.6.1 contains libwebp 1.6.0.
+Do not install the obsolete native binaries bundled with the old WebP package.
+
+- Install the Microsoft Visual C++ 2015–2022 Redistributable matching the IIS
+  application pool architecture.
+- Build/publish the server and deploy the complete output, including
+  `Imazen.WebP.dll`, `ImageResizer.Plugins.WebP.dll`, and all four native DLLs in
+  **each** of `bin/runtimes/win-x64/native` and `bin/runtimes/win-x86/native`.
+  Remove obsolete native WebP DLLs from earlier deployments; use a clean deployment.
+- Keep the Imazen.WebP binding redirect and the `WebPEncoder` registration in
+  `Web.config`. **Do not add `downloadNativeDependencies`, even with value `false`:**
+  the legacy plugin checks attribute presence and would download obsolete binaries.
+- `WebPEncoder` requires appropriate **ImageResizer Elite licensing**; deploying
+  this repository does not grant that license.
+- Keep `.jpg`/`.png` source URLs and request `?format=webp`. Changing the source
+  extension to `.webp` is not conversion. This config enables WebP **output** from
+  existing sources, not WebP uploads/decoding through the `/u/` route.
+
+The existing MSTest project includes native-encoder integration tests for JPEG/PNG
+to WebP, decoded dimensions, MIME types, transparency, standard-format regressions,
+and native deployment files. On Windows, restore/build the server first, then run:
+
+``` powershell
+nuget restore source/ResizingServer.sln
+msbuild source/ResizingServer/ResizingServer.csproj /p:Configuration=Release /p:Platform=AnyCPU
+dotnet test source/ResizingClient.Tests/ResizingClient.Tests.csproj -c Release -p:RunServerTests=true
+```
+
+Use .NET SDK 10 for restoring all client targets. The Windows CI job runs these
+tests; the default test command continues to run the net8.0 client tests.
+Cloud URL tests validate request syntax, not live cloud responses. Verify provider
+configuration and actual IIS responses in your deployment environment.
+
 Open Source Projects in Use
 
 [ImageResizer](http://imageresizing.net/) 
