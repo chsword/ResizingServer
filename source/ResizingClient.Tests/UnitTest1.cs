@@ -32,6 +32,9 @@ namespace ResizingClient.Tests
             Assert.AreEqual(
                 "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/200x300",
                 ResizingUtil.FormatTencentCdnUrl("https://img.example.com/u/face/a.jpg", 200, 300, ResizingMode.Max));
+            Assert.AreEqual(
+                "https://img.example.com/u/face/a.jpg?imageMogr2/thumbnail/200x300/pad/1",
+                ResizingUtil.FormatTencentCdnUrl("https://img.example.com/u/face/a.jpg", 200, 300, ResizingMode.Pad));
         }
 
         [TestMethod]
@@ -52,13 +55,13 @@ namespace ResizingClient.Tests
         public void FormatAwsCdnUrl_UsesExpectedQuery()
         {
             Assert.AreEqual(
-                "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,fit_cover",
+                "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,m_cover",
                 ResizingUtil.FormatAwsCdnUrl("https://img.example.com/u/face/a.jpg", 200, 300, ResizingMode.Crop));
             Assert.AreEqual(
-                "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,fit_contain",
+                "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,m_fit",
                 ResizingUtil.FormatAwsCdnUrl("https://img.example.com/u/face/a.jpg", 200, 300, ResizingMode.Max));
             Assert.AreEqual(
-                "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,fit_pad",
+                "https://img.example.com/u/face/a.jpg?x-amz-process=image/resize,w_200,h_300,m_pad",
                 ResizingUtil.FormatAwsCdnUrl("https://img.example.com/u/face/a.jpg", 200, 300, ResizingMode.Pad));
         }
 
@@ -68,6 +71,14 @@ namespace ResizingClient.Tests
             Assert.AreEqual(
                 "https://img.example.com/u/face/a.jpg?v=1&x-oss-process=image/resize,m_fill,w_200,h_300",
                 ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/u/face/a.jpg?v=1", 200, 300, ResizingMode.Crop));
+        }
+
+        [TestMethod]
+        public void CdnUrls_InsertQueryBeforeFragment()
+        {
+            Assert.AreEqual(
+                "https://img.example.com/u/face/a.jpg?x-oss-process=image/resize,m_fill,w_200,h_300#preview",
+                ResizingUtil.FormatAliyunCdnUrl("https://img.example.com/u/face/a.jpg#preview", 200, 300, ResizingMode.Crop));
         }
     }
 }

@@ -26,9 +26,16 @@ namespace ResizingClient
 
         public static string FormatTencentCdnUrl(string url, int width, int height, ResizingMode mode = ResizingMode.Crop)
         {
-            var query = mode == ResizingMode.Crop
-                ? $"imageMogr2/thumbnail/{width}x{height}/gravity/center/crop/{width}x{height}"
-                : $"imageMogr2/thumbnail/{width}x{height}";
+            var query = $"imageMogr2/thumbnail/{width}x{height}";
+            switch (mode)
+            {
+                case ResizingMode.Crop:
+                    query = $"{query}/gravity/center/crop/{width}x{height}";
+                    break;
+                case ResizingMode.Pad:
+                    query = $"{query}/pad/1";
+                    break;
+            }
             return AppendQuery(url, query);
         }
 
@@ -50,14 +57,14 @@ namespace ResizingClient
 
         public static string FormatAwsCdnUrl(string url, int width, int height, ResizingMode mode = ResizingMode.Crop)
         {
-            var fitToken = "fit_cover";
+            var fitToken = "m_cover";
             switch (mode)
             {
                 case ResizingMode.Max:
-                    fitToken = "fit_contain";
+                    fitToken = "m_fit";
                     break;
                 case ResizingMode.Pad:
-                    fitToken = "fit_pad";
+                    fitToken = "m_pad";
                     break;
             }
 
@@ -95,9 +102,11 @@ namespace ResizingClient
         static string AppendQuery(string url, string query)
         {
             if (string.IsNullOrWhiteSpace(url)) return url;
-            return url.IndexOf('?', StringComparison.Ordinal) >= 0
-                ? $"{url}&{query}"
-                : $"{url}?{query}";
+            var fragmentIndex = url.IndexOf('#');
+            var fragment = fragmentIndex >= 0 ? url.Substring(fragmentIndex) : string.Empty;
+            var urlWithoutFragment = fragmentIndex >= 0 ? url.Substring(0, fragmentIndex) : url;
+            var separator = urlWithoutFragment.IndexOf('?', StringComparison.Ordinal) >= 0 ? "&" : "?";
+            return $"{urlWithoutFragment}{separator}{query}{fragment}";
         }
 
         static string GetMode(ResizingMode mode)
